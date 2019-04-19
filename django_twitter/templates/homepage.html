@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Twitter</title>
+</head>
+<body>
+    <h1>Django-twitter</h1>
+    <h2>twitterhandle @{{ request.user.twitteruser.twitterhandle }}</h2>
+    <form action="/add_tweet/" method="Post">
+    {% csrf_token %}
+    <button>New Tweet</button>
+    </form>
+    <form action="/profile/" method="Post">
+    {% csrf_token %}
+    <button>Profile</button>
+    </form>
+    <form action="/logout/" method="Post">
+    {% csrf_token %}
+    <button>logout</button>
+    </form>
+    <div> 
+        <h2>Tweets</h2>
+        {% for tweet in tweets %}
+        <p><b>{{tweet.body}}</b> - author @{{tweet.twitter_user}}.</p>
+        {% endfor %}
+    </div>
+</body>
+</html>
