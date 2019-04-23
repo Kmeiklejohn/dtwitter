@@ -37,7 +37,7 @@ def login_view(request):
             user = authenticate(username=data['username'], password=data['password'])
             if user is not None:
                 login(request, user)
-                return HttpResponseRedirect(reverse('homepage'))
+                return HttpResponseRedirect(reverse('profile'))
 
     else:
         form = LoginForm()
@@ -69,8 +69,12 @@ def index(request):
 
 
 def profile_view(request):
+ 
+    current_user = TwitterUser.objects.filter(user=request.user)
+    user_tweets = Tweet.objects.filter(twitter_user=request.user.twitteruser)
+    data = {
+        "tweets": user_tweets,
+        "current_user": current_user
+        }
 
-  user = User.objects.get(username=request.user)
-
-
-  return render(request, 'profile.html', {'user': user})
+    return render(request, 'profile.html', data)

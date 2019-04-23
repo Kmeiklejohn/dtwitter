@@ -1,13 +1,11 @@
 
-    <h3>@{{ user.username }}</h3>
-
-    {% if user.tweets.all %}
-      {% for tweet in user.tweets.all %}
-        <div class="card" style="margin-bottom: 20px;">
-          <div class="card-body">
-            <h5 class="card-title">@{{ tweet.twitter_user}}</h5>
-            <p class="card-text"><b>{{ tweet.created_at }}</b> - {{ tweet.body }}</p>
-          </div>  
-        </div>
+    <h3>@{{ request.user.twitteruser.twitterhandle }}</h3>
+      
+      {% for tweet in tweets %}
+              <p> {{ tweet.body }} - @{{request.user.twitteruser.twitterhandle}} </p>
       {% endfor %}
-    {% endif %}
+<form action='/' method="GET">
+    <button action='/homepage/'>
+      Home
+    </button>
+</form>
